@@ -33,7 +33,7 @@ hello world
 # 3. 文件打开
 
 ```
-# bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s %s\n", comm, str(args.filename)); }'
+# bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s %s\n", comm, str(args->filename)); }'
 Attaching 1 probe...
 snmp-pass /proc/cpuinfo
 snmp-pass /proc/stat
@@ -74,7 +74,7 @@ Maps会在bpftrace结束(如按Ctrl-C)时自动打印出来。
 # 5. read()返回值分布统计
 
 ```
-# bpftrace -e 'tracepoint:syscalls:sys_exit_read /pid == 18644/ { @bytes = hist(args.ret); }'
+# bpftrace -e 'tracepoint:syscalls:sys_exit_read /pid == 18644/ { @bytes = hist(args->ret); }'
 Attaching 1 probe...
 ^C
 

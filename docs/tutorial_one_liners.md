@@ -37,7 +37,7 @@ This prints a welcome message. Run it, then hit Ctrl-C to end.
 # Lesson 3. File Opens
 
 ```
-# bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s %s\n", comm, str(args.filename)); }'
+# bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s %s\n", comm, str(args->filename)); }'
 Attaching 1 probe...
 snmp-pass /proc/cpuinfo
 snmp-pass /proc/stat
@@ -81,7 +81,7 @@ Maps are automatically printed when bpftrace ends (eg, via Ctrl-C).
 # Lesson 5. Distribution of read() Bytes
 
 ```
-# bpftrace -e 'tracepoint:syscalls:sys_exit_read /pid == 18644/ { @bytes = hist(args.ret); }'
+# bpftrace -e 'tracepoint:syscalls:sys_exit_read /pid == 18644/ { @bytes = hist(args->ret); }'
 Attaching 1 probe...
 ^C
 
